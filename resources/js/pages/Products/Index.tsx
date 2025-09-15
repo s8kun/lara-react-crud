@@ -18,15 +18,12 @@ interface Product {
     price: string;
 }
 
-type flashType = {
-    flash: {
-        message: string;
-    };
-    products: Product[];
-};
-
 export default function ProductsIndex() {
-    const { flash, products } = usePage().props as flashType;
+    const { flash, products } = usePage().props as unknown as {
+        flash: { message: string };
+        products: Product[];
+    };
+
     const [showMessage, setShowMessage] = useState(flash.message ?? '');
 
     useEffect(() => {
